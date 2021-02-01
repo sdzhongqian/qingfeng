@@ -1,0 +1,659 @@
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>后台登录-X-admin2.2</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="stylesheet" href="./css/font.css">
+        <link rel="stylesheet" href="./css/xadmin.css">
+        <link rel="stylesheet" href="./css/theme5.css">
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            // 是否开启刷新记忆tab功能
+            // var is_remember = false;
+        </script>
+    </head>
+    <body class="index">
+        <!-- 顶部开始 -->
+        <div class="container">
+            <div class="logo">
+                <a href="./indexbak.html">X-admin v2.2</a></div>
+            <div class="left_open">
+                <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+            </div>
+            <ul class="layui-nav left fast-add" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">+新增</a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
+                                <i class="iconfont">&#xe6a2;</i>弹出最大化</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('弹出自动宽高','http://www.baidu.com')">
+                                <i class="iconfont">&#xe6a8;</i>弹出自动宽高</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('弹出指定宽高','http://www.baidu.com',500,300)">
+                                <i class="iconfont">&#xe6a8;</i>弹出指定宽高</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('在tab打开','member-list.html')">
+                                <i class="iconfont">&#xe6b8;</i>在tab打开</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('在tab打开刷新','member-del.html',true)">
+                                <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">admin</a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                        <dd>
+                            <a href="./login.html">退出</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item to-index">
+                    <a href="/">前台首页</a></li>
+            </ul>
+        </div>
+        <!-- 顶部结束 -->
+        <!-- 中部开始 -->
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+            <div id="side-nav">
+                <ul id="nav">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                            <cite>会员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>统计页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表(静态表格)</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表(动态表格)</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员删除</cite></a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="iconfont">&#xe70b;</i>
+                                    <cite>会员管理</cite>
+                                    <i class="iconfont nav_right">&#xe697;</i></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                            <i class="iconfont">&#xe6a7;</i>
+                                            <cite>会员删除</cite></a>
+                                    </li>
+                                    <li>
+                                        <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
+                                            <i class="iconfont">&#xe6a7;</i>
+                                            <cite>等级管理</cite></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                            <cite>订单管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>订单列表</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>订单列表1</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
+                            <cite>分类管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('多级分类','cate.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>多级分类</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
+                            <cite>城市联动</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('三级地区联动','city.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>三级地区联动</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
+                            <cite>管理员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>管理员列表</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('角色管理','admin-role.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>角色管理</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('权限分类','admin-cate.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限分类</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('权限管理','admin-rule.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限管理</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
+                            <cite>系统统计</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>拆线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>拆线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('地图','echarts3.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>地图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('饼图','echarts4.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>饼图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>雷达图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('k线图','echarts6.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>k线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('热力图','echarts7.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>热力图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>仪表图</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
+                            <cite>图标字体</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>图标对应字体</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="其它页面">&#xe6b4;</i>
+                            <cite>其它页面</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="login.html" target="_blank">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>登录页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('错误页面','error.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>错误页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('示例页面','demo.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>示例页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('更新日志','log.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>更新日志</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="第三方组件">&#xe6b4;</i>
+                            <cite>layui第三方组件</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('滑块验证','https://fly.layui.com/extend/sliderVerify/')" target="">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>滑块验证</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('富文本编辑器','https://fly.layui.com/extend/layedit/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>富文本编辑器</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('eleTree 树组件','https://fly.layui.com/extend/eleTree/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>eleTree 树组件</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('图片截取','https://fly.layui.com/extend/croppers/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>图片截取</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('formSelects 4.x 多选框','https://fly.layui.com/extend/formSelects/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>formSelects 4.x 多选框</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('Magnifier 放大镜','https://fly.layui.com/extend/Magnifier/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>Magnifier 放大镜</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('notice 通知控件','https://fly.layui.com/extend/notice/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>notice 通知控件</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">关闭当前</dd>
+                        <dd data-type="other">关闭其它</dd>
+                        <dd data-type="all">关闭全部</dd></dl>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    </div>
+                </div>
+                <div id="tab_show"></div>
+            </div>
+        </div>
+        <div class="page-content-bg"></div>
+        <style id="theme_style"></style>
+        <!-- 右侧主体结束 -->
+        <style>
+            #tool{
+                position: fixed;
+                height: 300px;
+                width: 100%;
+                bottom: 0px;
+                background: #fff;
+                border-top: 5px solid #019587;
+                overflow: auto;
+                background: #E3E3E3;
+                padding-top: 15px;
+                box-sizing: border-box;
+                display: none;
+                z-index: 999;
+                /*padding-right: 250px;*/
+            }
+            body{
+                height: 100%;overflow: hidden;
+            }
+            #save{
+                position: fixed;
+                bottom:30px;
+                right: 30px;
+                z-index: 999;
+            }
+            .layui-form-switch{
+                margin-top: 0px;
+            }
+        </style>
+        <script src="./js/FileSaver.js"></script>
+        <script src="./js/html2canvas.min.js"></script>
+        <script>
+            var save_out_url = "/index/theme/save.html";
+        </script>
+        <form class="layui-form" action="/index/theme/add.html" method="post">
+            <div id="tool" class="layui-fluid" style="display: block;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                首页背景
+                                <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                                <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                                    <em>渐变</em>
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name="body.index" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="index_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style=""><i class="layui-icon layui-colorpicker-trigger-i layui-icon-close"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="index_bg[0]" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                顶部背景
+                                <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                                <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                                    <em>渐变</em>
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="top_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(34, 34, 34)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="top_bg[0]" value="rgb(34, 34, 34)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                顶部触发颜色
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .layui-nav-bar" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="top_border_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(95, 184, 120)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="top_border_bg[0]" value="rgb(95, 184, 120)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                LOGO背景
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .logo a" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="logo_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style=""><i class="layui-icon layui-colorpicker-trigger-i layui-icon-close"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="logo_bg[0]" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                LOGO颜色
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .logo a" selecter_name_attr="color">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="logo_color">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(255, 255, 255)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="logo_color[0]" value="rgb(255, 255, 255)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                左侧背景
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="left_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(238, 238, 238)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="left_bg[0]" value="rgb(238, 238, 238)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                左侧默认文字
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a" selecter_name_attr="color">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="left_a_color">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(51, 51, 51)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="left_a_color[0]" value="rgb(51, 51, 51)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                左侧列表背景
+                                <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                                <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                                    <em>渐变</em>
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="left_li_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(0, 150, 136)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="left_li_bg[0]" value="rgb(0, 150, 136)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                左侧列表文字
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="color">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="left_li_a_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(255, 255, 255)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="left_li_a_bg[0]" value="rgb(255, 255, 255)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                左侧列表边框
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="border-color">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="left_li_a_order_color">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(4, 86, 78)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="left_li_a_order_color[0]" value="rgb(4, 86, 78)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md2">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                内页背景
+                            </div>
+                            <div class="layui-card-body layuiadmin-card-list son" selecter_name="body" selecter_name_attr="background">
+                                <div class="layui-show-md-inline-block">
+                                    <div class="selecter layui-inline" id="iframe_bg">
+                                        <div class="layui-unselect layui-colorpicker">
+                                            <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(241, 241, 241)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="iframe_bg[0]" value="rgb(241, 241, 241)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style id="theme_style"></style>
+            <div id="save" class="layui-col-space15" style="bottom: 310px;">
+                <input type="hidden" id="index_style" name="index_style" />
+                <input type="hidden" id="iframe_style" name="iframe_style" />
+                <input type="hidden" id="img_data" name="img" />
+                <img src="" style="display: none;" id="demo" alt="" />
+                <span class="layui-btn layui-btn-normal" id="show_create">创作</span>
+                <button class="layui-btn" lay-submit="" lay-filter="add" id="theme_save">保存</button>
+                 <button class="layui-btn layui-btn-danger" lay-submit lay-filter="save_out">导出</button>
+            </div>
+        </form>
+
+        <script src="./js/create.js?id=34"></script>
+        <link href="./css/jquery.enjoyhint.css" rel="stylesheet">
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/enjoyhint.min.js"></script>
+
+        <script>
+//            var guide = layui.data('guide');
+//            if(!guide.is){
+//                var enjoyhint_instance = new EnjoyHint({});
+//                var enjoyhint_script_steps = [
+//                    {
+//                        'click #show_create' : '点击创作按钮，开始你的主题之旅！',
+//                        'skipButton' : {className: "myNext", text: "跳过"},
+//                    },
+//                    {
+//                        'click #top_bg' : '打开颜色选择框。',
+//                        'skipButton' : {className: "myNext", text: "跳过"},
+//                    },
+//                    {
+//                        'click .layui-colorpicker-main' : '选中你喜欢的颜色。',
+//                        'skipButton' : {className: "myNext", text: "跳过"},
+//                    },
+//                    {
+//                        'click .layui-btn-sm' : '点击确定按钮',
+//                        'skipButton' : {className: "myNext", text: "完成"},
+//                    }
+//                ];
+//                //set script config
+//                enjoyhint_instance.set(enjoyhint_script_steps);
+//                //run Enjoyhint script
+//                enjoyhint_instance.run();
+//
+//                layui.data('guide', {
+//                    key: 'is'
+//                    ,value: true
+//                });
+//            }
+        </script>
+
+        <!-- 中部结束 -->
+        <script>//百度统计可去掉
+            var _hmt = _hmt || []; (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();</script>
+    </body>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qingfeng.quartz.dao.TimTaskDao">
+
+	<!--查询分页列表-->
+	<select id="findListPage" parameterType="com.qingfeng.util.Page" resultType="com.qingfeng.util.PageData">
+		select
+			job.job_name as "jobname",
+			job.job_group as "jobgroup",
+			job.description as "description",
+			job.job_class_name as "jobclassname",
+			cron.cron_expression as "cronexpression",
+			tri.trigger_name as "triggername",
+			tri.trigger_state as "triggerstate",
+			tri.start_time as "start_time",
+			job.job_name as "oldjobname",
+			job.job_group as "oldjobgroup"
+			from qrtz_job_details job
+			left join qrtz_triggers tri on job.job_name = tri.job_name
+			left join qrtz_cron_triggers cron on cron.trigger_name = tri.trigger_name
+			where tri.trigger_type = 'CRON'
+			<if test="pd.job_name != null and pd.job_name != ''">
+				and job.job_name like concat('%',concat(#{pd.job_name},'%'))
+			</if>
+			<if test="pd.job_group != null and pd.job_group != ''">
+				and job.job_group like concat('%',concat(#{pd.job_group},'%'))
+			</if>
+	</select>
+
+	<!--查询分页数量-->
+	<select id="findListSize" parameterType="com.qingfeng.util.Page" resultType="Integer">
+		select
+		count(*)
+		from qrtz_job_details job
+		left join qrtz_triggers tri on job.job_name = tri.job_name
+		left join qrtz_cron_triggers cron on cron.trigger_name = tri.trigger_name
+		where tri.trigger_type = 'cron'
+		<if test="pd.job_name != null and pd.job_name != ''">
+			and job.job_name like concat('%',concat(#{pd.job_name},'%'))
+		</if>
+		<if test="pd.job_group != null and pd.job_group != ''">
+			and job.job_group like concat('%',concat(#{pd.job_group},'%'))
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>JS/jQuery图片查看器viewer.js演示-默认效果_dowebok</title>
+<link rel="stylesheet" href="css/viewer.min.css">
+<style>
+* { margin: 0; padding: 0;}
+#dowebok { width: 700px; margin: 0 auto; font-size: 0;}
+#dowebok li { display: inline-block; width: 32%; margin-left: 1%; padding-top: 1%;}
+#dowebok li img { width: 100%;}
+</style>
+</head>
+
+<body>
+<h1>默认效果</h1>
+
+<ul id="dowebok">
+	<li><img data-original="img/tibet-1.jpg" src="img/thumbnails/tibet-1.jpg" alt="图片1"></li>
+	<li><img data-original="img/tibet-2.jpg" src="img/thumbnails/tibet-2.jpg" alt="图片2"></li>
+	<li><img data-original="img/tibet-3.jpg" src="img/thumbnails/tibet-3.jpg" alt="图片3"></li>
+	<li><img data-original="img/tibet-4.jpg" src="img/thumbnails/tibet-4.jpg" alt="图片4"></li>
+	<li><img data-original="img/tibet-5.jpg" src="img/thumbnails/tibet-5.jpg" alt="图片5"></li>
+	<li><img data-original="img/tibet-6.jpg" src="img/thumbnails/tibet-6.jpg" alt="图片6"></li>
+</ul>
+
+<script src="js/viewer.min.js"></script>
+<script>
+var viewer = new Viewer(document.getElementById('dowebok'), {
+	url: 'data-original'
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 以下信息与演示无关，可不必理会 -->
+<style>
+body { margin: 0; border-left: 200px solid #ccc;}
+
+h1 { margin: 40px auto; font: 32px "Microsoft Yahei"; text-align: center;}
+
+.menu { position: absolute; left: 0; top: 0; bottom: 0; width: 200px; padding-top: 100px; font-family: Consolas,arial,"宋体"; background-color: #ccc;}
+.menu a { display: block; height: 40px; margin: 0 0 1px 2px; padding-left: 10px; line-height: 40px; font-size: 14px; color: #333; text-decoration: none;}
+.menu a:hover { background-color: #eee;}
+.menu .cur { color: #000; background-color: #fff !important;}
+
+.vad { margin: 50px 0 10px; font-family: Consolas,arial,宋体,sans-serif; text-align:center;}
+.vad a { display: inline-block; height: 36px; line-height: 36px; margin: 0 5px; padding: 0 50px; font-size: 14px; text-align:center; color:#eee; text-decoration: none; background-color: #222;}
+.vad a:hover { color: #fff; background-color: #000;}
+.thead { width: 728px; height: 90px; margin: 0 auto; border-bottom: 40px solid transparent;}
+
+.code { position: relative; margin-top: 100px; padding-top: 41px;}
+.code h3 { position: absolute; top: 0; z-index: 10; width: 100px; height: 40px; font: 16px/40px "Microsoft Yahei"; text-align: center; cursor: pointer;}
+.code .cur { border: 1px solid #f0f0f0; border-bottom: 1px solid #f8f8f8; background-color: #f8f8f8;}
+.code .h31 { left: 0;}
+.code .h32 { left: 102px;}
+.code .h33 { left: 204px;}
+.code .h34 { left: 306px;}
+.code ol { padding: 0;}
+.code { width: 800px; margin-left: auto; margin-right: auto;}
+pre { padding: 15px 0; border: 1px solid #f0f0f0; background-color: #f8f8f8;}
+.f-dn { display: none;}
+</style>
+
+<p class="vad">
+	<a href="http://www.dowebok.com/" target="_blank">dowebok.com</a>
+	<a href="http://www.dowebok.com/192.html" target="_blank">说 明</a>
+	<a href="http://www.dowebok.com/192.html" target="_blank">下 载</a>
+</p>
+
+<div class="menu">
+	<a class="cur" href="index.html">1、默认效果</a>
+	<a href="index2.html">2、jQuery版本</a>
+	<a href="index3.html">3、回调函数</a>
+	<a href="index4.html">4、自定义方法</a>
+</div>
+
+</body>
+</html>

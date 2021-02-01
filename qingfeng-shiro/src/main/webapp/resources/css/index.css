@@ -1,0 +1,53 @@
+.layui-form-select dl dd, .layui-form-select dl dt {
+    padding: 0 20px;
+    line-height: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.layui-form-select dl dd:hover, .layui-form-select dl dt:hover {
+    padding: 0 20px;
+    line-height: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #009688;
+}
+
+.tab{
+    font-size: 14px;padding-right: 6px;
+}
+
+.moreMenu {
+    /*top: 44px;*/
+    z-index: 999;
+    position: relative;
+    width: 100%;
+    min-height: 90px;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0.8;
+    overflow: visible!important;
+}
+.left_menu {
+    height: 45px;
+    float: left;
+    margin-left: 10px;
+    display: block;
+    line-height: 45px;
+    text-align: center;
+    cursor: pointer;
+}
+.layui-btn-item {
+    color: #FFF;
+    background-color: transparent;
+    margin: 2px 40px;
+    border-radius: 0;
+    height: 34px !important;
+    line-height: 34px !important;
+    padding: 0 16px !important;
+}
+.layui-btn-item:hover{
+    border-bottom: 5px solid #5FB878;
+}
