@@ -46,7 +46,7 @@ public class TestController extends BaseController {
      */ 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public void index(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PageData  pd = new PageData(request);
+        PageData pd = new PageData(request);
 
         Json json = new Json();
         json.setData(pd);
@@ -106,8 +106,8 @@ public class TestController extends BaseController {
         PageData pd = new PageData();
         pd.put("name","王宝强");
         pd.put("code","SD202103010001");
-        pd.put("start_date",DateTimeUtil.getBeforeDaty(10));
-        pd.put("end_date",DateTimeUtil.getDate());
+        pd.put("start_date", DateTimeUtil.getBeforeDaty(10));
+        pd.put("end_date", DateTimeUtil.getDate());
         pd.put("kc_name","青锋微课堂-青锋后台系统开源产品培训");
         pd.put("class_time","48");
         ModelAndView mv = new ModelAndView();
@@ -139,14 +139,15 @@ public class TestController extends BaseController {
         SimpleDateFormat sdf = new SimpleDateFormat("MM");
         String month = sdf.format(new Date());
         //电子章
-        String url = session.getServletContext().getRealPath("/") + "/resources/images/qingfeng_dzz.png";
+        String url = session.getServletContext().getRealPath("/") + "/resources/images/qingfeng_dzz.png";;
         InputStream inputStream=new FileInputStream(url);
-        compositePicture(tempPath,ParaUtil.localName+path,pd.get("name").toString()+"：",pd.get("code").toString(),line, DateTimeUtil.getCurrentYear(),month,fontPath,inputStream);
+        compositePicture(tempPath, ParaUtil.localName+path,pd.get("name").toString()+"：",pd.get("code").toString(),line, DateTimeUtil.getCurrentYear(),month,fontPath,inputStream);
 
         pd.put("show_cert_path", ParaUtil.cloudfile+path);
         pd.put("cert_path",path);
         Json json = new Json();
         json.setSuccess(true);
+        json.setData(pd);
         json.setMsg("生成证书成功。");
         this.writeJson(response,json);
     }
