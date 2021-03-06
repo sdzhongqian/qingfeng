@@ -1,0 +1,133 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../../system/admin/top.jsp"%>
+
+<form class="layui-form" action="" id="form">
+    <table width="95%" style="margin: 0 auto">
+        <tr>
+            <td width="15%" align="right"><label class="layui-form-label">标题：<span style="color: red">*</span></label></td>
+            <td colspan="3"><input type="text" name="title" id="title" lay-verify="required|field_len50" autocomplete="off" placeholder="标题" class="layui-input"></td>
+        </tr>
+        <tr>
+            <td width="15%" align="right"><label class="layui-form-label">发布人：</label></td>
+            <td><input type="text" name="publish_user" id="publish_user" value="${loginUser.name}" lay-verify="field_len50" autocomplete="off" placeholder="发布人" class="layui-input"></td>
+            <td width="15%" align="right"><label class="layui-form-label">发布时间：</label></td>
+            <td><input type="text" name="publish_time" id="publish_time" lay-verify="field_len50" autocomplete="off" placeholder="发布时间" class="layui-input"></td>
+        </tr>
+        <tr>
+            <td width="15%" align="right"><label class="layui-form-label">附件：</label></td>
+            <td colspan="3">
+                <div id="file_show" style="float: left;padding-top: 8px;line-height: 40px;">
+                    <c:forEach items="${fileList}" var="v" varStatus="vs">
+                        <a type="button" onclick="downloadFile('${v.id}','${v.file_path}','${v.name}');" class="layui-btn layui-btn-xs">${v.name}</a>
+                    </c:forEach>
+                </div>
+                <div style="float: left;padding-left: 10px;">
+                    <button type="button" class="layui-btn  layui-btn-xs" id="upload_file">附件上传</button>
+                    <input type="hidden" name="fileId" id="fileId" value="${fileList[0].id}" class="layui-input">
+                    <input type="hidden" name="filePath" id="filePath" value="${fileList[0].file_path}" class="layui-input">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><label class="layui-form-label">排序号：</label></td>
+            <td colspan="3"><input type="text" name="order_by" id="order_by" lay-verify="field_len50|intNumber" autocomplete="off" placeholder="排序号" class="layui-input"></td>
+        </tr>
+        <tr>
+            <td align="right"><label class="layui-form-label">简介：</label></td>
+            <td colspan="3"><textarea name="intro" placeholder="请输入简介" class="layui-textarea"></textarea></td>
+        </tr>
+        <tr style="padding: 10px auto">
+            <td width="15%" align="right"><label class="layui-form-label_right">内容：</label></td>
+            <td colspan="3">
+                <script type="text/plain" id="myContent" style="width: 100%;height:500px;"></script>
+                <input type="hidden" name="content" id="content">
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><label class="layui-form-label">备注：</label></td>
+            <td colspan="3"><textarea name="remark" placeholder="请输入备注" class="layui-textarea"></textarea></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; padding-top: 10px;" colspan="4">
+                <div class="layui-form-item">
+                    <input type="hidden" name="type" id="type" value="${pd.type}">
+                    <button type="button" class="layui-btn layui-btn-sm" id="submit_button" lay-submit="" lay-filter="submit_form">保存</button>
+                    <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" id="cancel">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/xadmin/lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/qfverify.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/qfAjaxReq.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadOneFile.js"></script>
+<link href="${pageContext.request.contextPath}/resources/plugins/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/resources/plugins/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/resources/plugins/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/umeditor/lang/zh-cn/zh-cn.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    var form,layer,layedit,laydate,upload;
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+        form = layui.form;
+        layer = layui.layer;
+        layedit = layui.layedit;
+        laydate = layui.laydate;
+        upload = layui.upload;
+
+        $('#cancel').on('click',function (){
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        });
+
+        //初始化上传
+        uploadOneFile('common_graphic');
+        //初始化日期
+        initDateType("publish_time",true);
+
+        //自定义验证规则
+        form.verify(form_verify);
+
+        //实例化编辑器
+        var myContent = UM.getEditor('myContent', {zIndex: 1});
+
+        //监听提交
+        form.on('submit(submit_form)', function(data){
+            layer.msg('正在提交数据。');
+            $("#content").val(UM.getEditor('myContent').getContent());
+            $("#submit_button").attr('disabled',true);
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "${pageContext.request.contextPath}/common/graphic/save" ,//url
+                data: $('#form').serialize(),
+                success: function (res) {
+                    if (res.success) {
+                        layer.msg("数据保存成功。", {time: 2000},function(){
+                            setOpenCloseParam("reload");
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        });
+                    }else{
+                        $("#submit_button").attr('disabled',false);
+                        if(res.loseSession=='loseSession'){
+                            loseSession(res.msg,res.url)
+                        }else{
+                            layer.msg(res.msg, {time: 2000});
+                        }
+                    }
+                },
+                error : function() {
+                    $("#submit_button").attr('disabled',false);
+                    layer.msg("异常！");
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+
+<%@include file="../../system/admin/bottom.jsp"%>
