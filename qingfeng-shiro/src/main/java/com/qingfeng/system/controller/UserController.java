@@ -406,6 +406,7 @@ public class UserController extends BaseController {
 					orgPd.put("position",position[i]);
 					orgPd.put("order_by",child_order_by[i]);
 					if(Verify.verifyIsNotNull(child_id[i])){
+						orgPd.put("id",child_id[i]);
 						orgPd.put("update_time", time);
 						userService.updateUserOrganize(orgPd);
 					}else{

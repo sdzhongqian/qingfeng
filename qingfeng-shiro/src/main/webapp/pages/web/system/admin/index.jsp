@@ -242,6 +242,232 @@
 </style>
 <script src="${pageContext.request.contextPath}/resources/plugins/xadmin/js/FileSaver.js"></script>
 <script src="${pageContext.request.contextPath}/resources/plugins/xadmin/js/html2canvas.min.js"></script>
+<script>
+    var save_out_url = "${pageContext.request.contextPath}/system/theme/saveTheme";
+    var theme_url = "${pageContext.request.contextPath}/system/theme/index?menuAuthId=bba6e6292dc14d59a598ab1912b23e02";
+</script>
+<form class="layui-form" action="/index/theme/add.html" method="post">
+    <div id="tool" class="layui-fluid" style="display: none;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        首页背景
+                        <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                        <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                            <em>渐变</em>
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name="body.index" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="index_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style=""><i class="layui-icon layui-colorpicker-trigger-i layui-icon-close"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="index_bg[0]" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        顶部背景
+                        <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                        <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                            <em>渐变</em>
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="top_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(34, 34, 34)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="top_bg[0]" value="rgb(34, 34, 34)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        顶部触发颜色
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .layui-nav-bar" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="top_border_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(95, 184, 120)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="top_border_bg[0]" value="rgb(95, 184, 120)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        LOGO背景
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .logo a" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="logo_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style=""><i class="layui-icon layui-colorpicker-trigger-i layui-icon-close"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="logo_bg[0]" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        LOGO颜色
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".container .logo a" selecter_name_attr="color">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="logo_color">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(255, 255, 255)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="logo_color[0]" value="rgb(255, 255, 255)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        左侧背景
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="left_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(238, 238, 238)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="left_bg[0]" value="rgb(238, 238, 238)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        左侧默认文字
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a" selecter_name_attr="color">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="left_a_color">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(51, 51, 51)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="left_a_color[0]" value="rgb(51, 51, 51)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        左侧列表背景
+                        <input type="checkbox" lay-skin="switch" lay-filter="turn" lay-text="关闭|渐变" name="" />
+                        <div class="layui-unselect layui-form-switch" lay-skin="_switch">
+                            <em>渐变</em>
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="left_li_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(0, 150, 136)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="left_li_bg[0]" value="rgb(0, 150, 136)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        左侧列表文字
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="color">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="left_li_a_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(255, 255, 255)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="left_li_a_bg[0]" value="rgb(255, 255, 255)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        左侧列表边框
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list result" selecter_name=".left-nav a:hover,.left-nav a.active" selecter_name_attr="border-color">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="left_li_a_order_color">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(4, 86, 78)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="left_li_a_order_color[0]" value="rgb(4, 86, 78)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm6 layui-col-md2">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        内页背景
+                    </div>
+                    <div class="layui-card-body layuiadmin-card-list son" selecter_name="body" selecter_name_attr="background">
+                        <div class="layui-show-md-inline-block">
+                            <div class="selecter layui-inline" id="iframe_bg">
+                                <div class="layui-unselect layui-colorpicker">
+                                    <span class="layui-colorpicker-trigger-bgcolor"><span class="layui-colorpicker-trigger-span" lay-type="rgba" style="background: rgb(241, 241, 241)"><i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="iframe_bg[0]" value="rgb(241, 241, 241)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--<style id="theme_style"></style>--%>
+    <c:if test="${loginUser.type=='0'}">
+        <div id="save" class="layui-col-space15" style="bottom: 30px;">
+            <input type="hidden" id="index_style" name="index_style" />
+            <input type="hidden" id="iframe_style" name="iframe_style" />
+            <input type="hidden" id="img_data" name="img" />
+            <input type="hidden" id="title" name="title" />
+            <img src="" style="display: none;" id="demo" alt="" />
+            <span class="layui-btn layui-btn-normal" id="show_create">创作</span>
+            <button type="button" class="layui-btn" lay-submit="" lay-filter="add" id="add">保存</button>
+            <button type="button" class="layui-btn layui-btn-danger" lay-submit lay-filter="save_out">导出</button>
+        </div>
+    </c:if>
+</form>
+
 <script src="${pageContext.request.contextPath}/resources/plugins/xadmin/js/create.js?id=34"></script>
 <link href="${pageContext.request.contextPath}/resources/plugins/xadmin/css/jquery.enjoyhint.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/plugins/xadmin/js/enjoyhint.min.js"></script>
@@ -288,6 +514,7 @@
             }
         }else{//获取子菜单数据
             $("#left").show();
+            $("#left").attr("style","width:220px");
             $("#right").attr("style","left:220px");
             //查询左侧菜单
             $.ajax({

@@ -140,7 +140,7 @@
 				and a.dic_cascade like concat('%',concat(#{dic_cascade},'%'))
 			</if>
 			<if test="parent_id != null and parent_id != ''">
-				and a.parent_id = #{parent_id}
+				and (a.parent_id = #{parent_id} or b.code = #{parent_id})
 			</if>
 			<if test="type != null and type != ''">
 				and a.type = #{type}
