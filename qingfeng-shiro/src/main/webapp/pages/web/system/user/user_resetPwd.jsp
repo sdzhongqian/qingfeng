@@ -54,6 +54,9 @@
                 dataType: "json",//预期服务器返回的数据类型
                 url: "${pageContext.request.contextPath}/system/user/updatePwd" ,//url
                 data: $('#form').serialize(),
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("httpToken", '${csrfToken}');
+                },
                 success: function (res) {
                     if (res.success) {
                         layer.msg("密码设置成功。", {time: 2000},function(){

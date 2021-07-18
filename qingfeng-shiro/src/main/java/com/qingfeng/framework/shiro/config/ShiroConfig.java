@@ -22,6 +22,7 @@ package com.qingfeng.framework.shiro.config;
 import com.qingfeng.framework.redis.CustomRedisManager;
 import com.qingfeng.framework.redis.RedisProperties;
 import com.qingfeng.framework.shiro.credentials.RetryLimitCredentialsMatcher;
+import com.qingfeng.framework.shiro.filter.CsrfFilter;
 import com.qingfeng.framework.shiro.filter.KickoutSessionFilter;
 import com.qingfeng.framework.shiro.filter.OnlineSessionFilter;
 import com.qingfeng.framework.shiro.filter.SyncOnlineSessionFilter;
@@ -30,6 +31,7 @@ import com.qingfeng.framework.shiro.server.*;
 import com.qingfeng.framework.shiro.service.ShiroService;
 import com.qingfeng.framework.shiro.session.ShiroSessionManager;
 import com.qingfeng.util.spring.SpringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
@@ -46,6 +48,7 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,10 +56,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.Filter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Shiro配置类
@@ -75,6 +75,8 @@ public class ShiroConfig {
     private ShiroService shiroService;
     @Autowired
     private RedisProperties redisProperties;
+    @Value("${csrf.domains}")
+    private String csrf_domains;
 
     @Bean
     public MethodInvokingFactoryBean methodInvokingFactoryBean(SecurityManager securityManager){
@@ -117,6 +119,8 @@ public class ShiroConfig {
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         //限制同一帐号同时在线的个数
         filters.put("kickout", kickoutSessionFilter());
+        //加入csrfFilter拦截器
+        filters.put("csrfFilter", csrfFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -323,5 +327,34 @@ public class ShiroConfig {
         kickoutSessionFilter.setKickoutUrl("/system/login/login?kickout=1");
         return kickoutSessionFilter;
     }
+
+
+    @Bean
+    public CsrfFilter csrfFilter() {
+        // 这里使用的是配置文件信息，获取配置文件中的csrf.domains相关值信息
+        String csrfDomains = csrf_domains;
+        List list = Collections.<String>emptyList();
+        if (StringUtils.isNotBlank(csrfDomains)) {
+            list = Arrays.asList(csrfDomains.split(","));
+        }
+        CsrfFilter csrfFilter = new CsrfFilter(list);
+        return csrfFilter;
+    }
+
+
+//    @Bean
+//    public FilterRegistrationBean csrfFilter() {
+//        FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
+//        // 这里使用的是配置文件信息，获取配置文件中的csrf.domains相关值信息
+//        String csrfDomains = properties().getProperty("csrf.domains");
+//        if (StringUtils.isNotBlank(csrfDomains)) {
+//            filterRegistration.setFilter(new CsrfFilter(Arrays.asList(csrfDomains.split(","))));
+//        } else {
+//            filterRegistration.setFilter(new CsrfFilter(Collections.<String>emptyList()));
+//        }
+//        filterRegistration.setEnabled(true);
+//        filterRegistration.addUrlPatterns("/*");
+//        return filterRegistration;
+//    }
 
 }

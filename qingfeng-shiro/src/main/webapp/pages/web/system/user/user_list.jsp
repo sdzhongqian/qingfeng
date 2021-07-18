@@ -137,8 +137,12 @@
             ,title: '用户数据表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left', width:40}
-                ,{field:'login_name', fixed: 'left',title:'登录名', width:120}
-                ,{field:'name', title:'姓名', width:120}
+                ,{field:'', fixed: 'left',title:'登录名', width:120, templet: function(res){
+                        return filterXSS(res.login_name);
+                    }}
+                ,{field:'', title:'姓名', width:120, templet: function(res){
+                        return filterXSS(res.name);
+                    }}
 //                ,{field:'uorg_type', title:'类型', width:100, templet: function(res){
 //                    if(res.uorg_type=='0'){
 //                        return '主组织';
@@ -146,19 +150,19 @@
 //                        return '兼职组织';
 //                    }
 //                }}
-                ,{field:'sex', title:'性别', width:100, sort: true, templet: function(res){
-                    if(res.sex=='1'){
-                        return '男';
-                    }else if(res.sex=='2'){
-                        return '女';
-                    }else{
-                        return '未知';
-                    }
-                }}
+//                ,{field:'sex', title:'性别', width:100, sort: true, templet: function(res){
+//                    if(res.sex=='1'){
+//                        return '男';
+//                    }else if(res.sex=='2'){
+//                        return '女';
+//                    }else{
+//                        return '未知';
+//                    }
+//                }}
                 ,{field:'phone', title:'手机号', width:120, edit: 'text'}
-                ,{field:'email', title:'邮箱', width:120, edit: 'text', templet: function(res){
-                    return '<em>'+ res.email +'</em>'
-                }}
+//                ,{field:'email', title:'邮箱', width:120, edit: 'text', templet: function(res){
+//                    return '<em>'+ res.email +'</em>'
+//                }}
                 ,{field:'status', title: '状态', sort: true,templet: function(res){
                     if(res.status=='0'){
                         return "<span style='color: #32CD32;font-weight: bold'>启用</span>";
@@ -170,7 +174,7 @@
                 }}
                 ,{field:'order_by', title:'排序', edit: 'text'}
                 ,{field:'create_time', title:'创建时间'}
-                ,{fixed: 'right', align:'center',title:'操作', width:290, toolbar: '#barDemo'}
+                ,{fixed: 'right', align:'center',title:'操作', width:300, toolbar: '#barDemo'}
             ]]
             ,id:'system_user'
             ,page: true

@@ -25,6 +25,7 @@
     <![endif]-->
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/qfCommon.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/qfPassValue.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/xssjs/xss.js"></script>
     <input type="hidden" id="ctxValue" value="${pageContext.request.contextPath}">
 </head>
 
