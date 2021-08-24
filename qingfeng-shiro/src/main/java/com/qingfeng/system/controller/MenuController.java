@@ -367,7 +367,7 @@ public class MenuController extends BaseController {
 	public void del(HttpServletRequest request, HttpServletResponse response) throws IOException  {
 		PageData pd = new PageData(request);
 		String[] ids = pd.get("ids").toString().split(",");
-		pd.put("menu_ids", Arrays.asList(ids));
+		pd.put("del_menu_ids", Arrays.asList(ids));
 		//删除角色菜单
 		roleService.delRoleMenu(pd);
 		menuService.del(ids);

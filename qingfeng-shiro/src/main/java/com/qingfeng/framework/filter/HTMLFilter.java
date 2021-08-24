@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * @author Administrator
  * @version 1.0.0
  * @Description HTMLFilter
- * @createTime 2021/7/18 0018 21:11
+ * @createTime 2021/7/18 0018 19:33
  */
 public final class HTMLFilter implements CharacterFilter {
 
@@ -247,15 +247,38 @@ public final class HTMLFilter implements CharacterFilter {
 
     private String validateCustomizeParam(final String s){
         String value = s;
-//        System.out.println(value);
         value = value.replaceAll("'","");
-        value = value.replaceAll("-","");
-        value = value.replaceAll("alert","");
-        value = value.replaceAll("prompt","");
-//        System.out.println("---------------------进来了-------------------");
-//        System.out.println(value);
+        value = replaceAlert(value);
+        value = replacePrompt(value);
+        value = replaceConfirm(value);
         return value;
     }
+
+    //递归替换alert
+    private String replaceAlert(String value){
+        String val = value.replaceAll("alert","");
+        if(val.contains("alert")){
+            return replaceAlert(val);
+        }
+        return val;
+    }
+    //递归提换prompt
+    private String replacePrompt(String value){
+        String val = value.replaceAll("prompt","");
+        if(val.contains("prompt")){
+            return replaceAlert(val);
+        }
+        return val;
+    }
+    //递归提换Confirm
+    private String replaceConfirm(String value){
+        String val = value.replaceAll("prompt","");
+        if(val.contains("prompt")){
+            return replaceAlert(val);
+        }
+        return val;
+    }
+
 
     private String escapeComments(final String s) {
         final Matcher m = P_COMMENTS.matcher(s);

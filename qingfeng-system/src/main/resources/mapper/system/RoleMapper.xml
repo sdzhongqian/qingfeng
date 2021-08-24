@@ -195,18 +195,16 @@
 			</foreach>
 		</if>
 		<if test="menu_ids != null and menu_ids.size > 0">
+			and menu_id not in
+			<foreach collection="menu_ids" item="id" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+		</if>
+		<if test="del_menu_ids != null and del_menu_ids.size > 0">
 			and menu_id in
-			(
-				select a.id from (
-				<foreach collection="menu_ids" item="id" open="(" separator="union all" close=")">select id from system_menu
-					where menu_cascade like
-					concat('%',concat((select a.menu_cascade from (select id,menu_cascade from system_menu) a where a.id
-					in (
-					#{id}
-					) ),'%'))
-				</foreach>
-				) a
-			)
+			<foreach collection="del_menu_ids" item="id" open="(" separator="," close=")">
+				#{id}
+			</foreach>
 		</if>
 	</delete>
 
