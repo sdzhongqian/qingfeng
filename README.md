@@ -14,6 +14,11 @@ https://edu.51cto.com/course/26169.html
 
 文章分享：[今日头条](https://www.toutiao.com/c/user/token/MS4wLjABAAAAIza_5ghlkgfgqnFEcA31C_AtdZX3-H4vg1ig19FUzGY/)
 
+#### 交流群
+为了大家的交流，特建立青锋项目交流群，欢迎大家的加入讨论， **项目中数据库脚本需要加群获取** 。
+ **QQ交流群：青锋产品交流1群(已满)：826025670   青锋产品交流2群：772893019  青锋产品交流3群：315978117** 
+ **微信号：QF_qingfeng1024 (加微信、群主拉进微信交流群)** 
+ 
 #### 各版本说明
  **一、Shiro版（本版本开源）【持续更新】：** 
 1、采用技术：
@@ -111,17 +116,5 @@ quartz定时器：Cron表达式生成器、quartz任务管理、业务案例介�
 8、shiro版中使用了redis,需要启动redis服务
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/1127/135457_96004e74_395948.png "图片11.png")
-
-#### 使用说明
-
-为了大家的交流，特建立青锋项目交流群，欢迎大家的加入讨论，**项目中数据库脚本需要加群获取** 。
-QQ交流群
-
-![输入图片说明](https://images.gitee.com/uploads/images/2020/1127/134817_654af53d_395948.png "图片9.png")
-
-
-青锋微信（拉您进群，微信群经常失效！！！）
-
-![输入图片说明](https://images.gitee.com/uploads/images/2020/1213/213839_55ba7bfa_395948.png "qunzhu.png")
 
 
