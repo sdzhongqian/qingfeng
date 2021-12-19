@@ -87,17 +87,17 @@
             <version>1.0.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.commons-fileupload</groupId>-->
+<!--            <artifactId>commons-fileupload</artifactId>-->
+<!--            <version>1.2.2</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>com.ueditor-mini</groupId>
-            <artifactId>ueditor-mini</artifactId>
-            <version>1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ueditor-mini</groupId>-->
+<!--            <artifactId>ueditor-mini</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.qingfeng</groupId>

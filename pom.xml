@@ -17,7 +17,6 @@
   </modules>
 
   <name>com.qingfeng</name>
-  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -96,21 +95,22 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.39</version>
+      <!--<version>5.1.39</version>-->
+      <version>8.0.11</version>
     </dependency>
 
     <!--sqlserver-->
-    <dependency>
-      <groupId>com.microsoft.sqlserver</groupId>
-      <artifactId>sqljdbc4</artifactId>
-      <version>4.0</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.microsoft.sqlserver</groupId>-->
+<!--      <artifactId>sqljdbc4</artifactId>-->
+<!--      <version>4.0</version>-->
+<!--    </dependency>-->
     <!--oracle-->
-    <dependency>
-      <groupId>com.oracle</groupId>
-      <artifactId>ojdbc7</artifactId>
-      <version>12.1.0.2</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.oracle</groupId>-->
+<!--      <artifactId>ojdbc7</artifactId>-->
+<!--      <version>12.1.0.2</version>-->
+<!--    </dependency>-->
     <!-- pagehelper -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
